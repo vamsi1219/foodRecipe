@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>Recipe Display</title>
+  <style>
+    .search {
+      background-color: rgb(237, 234, 237);
+      padding: 0px 10px !important;
+      border-radius: 25px;
+    }
+
+    .search input {
+      background-color: rgb(215, 211, 215);
+      border: 2px solid rgb(215, 211, 215);
+
+    }
+
+    .search input:focus {
+      border: 2px solid rgb(215, 211, 215);
+      outline: none;
+    }
+
+    .navbar {
+      padding-top: 20px !important;
+      align-items: center;
+    }
+
+    .navbar {
+      margin-top: -20px;
+    }
+
+    .search {
+      margin-top: -15px;
+    }
+
+    .search {
+      background-color: rgb(251, 248, 251);
+      padding: 10px;
+      border-radius: 25px;
+      display: flex;
+      align-items: center;
+    }
+
+    .search input {
+      background-color: rgb(251, 248, 251);
+      border: 2px solid rgb(251, 248, 251);
+      border-radius: 25px;
+      padding: 5px 10px;
+      margin-left: 5px;
+    }
+
+    .search input:focus {
+      border: 2px solid rgb(237, 233, 237);
+      outline: none;
+    }
+
+    .navbar {
+      padding-top: 20px !important;
+      align-items: center;
+      margin-top: -20px;
+    }
+
+    .search {
+      margin-top: -15px;
+    }
+
+    .logo {
+      transition: transform 0.8s ease, filter 0.8s ease, box-shadow 0.8s ease, opacity 0.8s ease, color 0.8s ease, background-color 0.8s ease, text-shadow 0.8s ease, border 0.8s ease;
+    }
+
+    .logo:hover {
+      transform: scale(1.5) rotate(-10deg) skew(15deg, -15deg);
+      /* Scale, rotate, and skew on hover */
+      filter: brightness(1.8) contrast(1.5);
+      /* Increase brightness and contrast */
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+      /* Larger shadow effect */
+      opacity: 0.8;
+      /* Slightly transparent */
+      color: #ff4500;
+      /* Change color */
+      background: linear-gradient(45deg, rgba(255, 69, 0, 0.4), rgba(255, 255, 255, 0.4));
+      /* Gradient background */
+      text-shadow: 0 0 25px rgba(255, 69, 0, 0.8);
+      /* Intense orange glow */
+      border-radius: 15%;
+      /* Rounded corners */
+      border: 3px solid #ff4500;
+      /* Thicker border color */
+      transform-style: preserve-3d;
+      /* 3D transform style */
+      perspective: 1000px;
+      /* Perspective for 3D effects */
+    }
+
+    .logo:hover::before {
+      content: "🎉";
+      /* Add a celebration emoji or icon */
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      font-size: 2em;
+      opacity: 0.6;
+      color: #ff4500;
+      transform: rotate(30deg);
+    }
+
+    /* Heading Styles */
+    h1 {
+      font-size: 2.5em;
+      font-weight: bold;
+      transition: transform 0.5s ease, color 0.5s ease, text-shadow 0.5s ease, background 0.5s ease;
+      background: linear-gradient(90deg, rgba(255, 69, 0, 0.3), rgba(255, 255, 255, 0.3));
+      background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      position: relative;
+      display: inline-block;
+    }
+
+    h1:hover {
+      transform: scale(1.1) rotate(-2deg);
+      color: violet;
+      text-shadow: 0 0 15px rgba(255, 69, 0, 0.8), 0 0 25px rgba(255, 69, 0, 0.8);
+    }
+
+    h1::before {
+      content: "✨";
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      font-size: 2em;
+      opacity: 0.6;
+      color: #ff4500;
+      transform: rotate(30deg);
+      animation: sparkle 2s linear infinite;
+    }
+
+    @keyframes sparkle {
+      0% {
+        opacity: 0.6;
+        transform: rotate(30deg) scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: rotate(30deg) scale(1.2);
+      }
+
+      100% {
+        opacity: 0.6;
+        transform: rotate(30deg) scale(1);
+      }
+    }
+
+    .card-body {
+      background-color: #f7edf7;
+    }
+
+    .card-body img {
+      filter: drop-shadow(2px 2px 20px #e768e7);
+    }
+
+    .instruction {
+      background-color: #f7edf7 !important;
+    }
+
+    .navbar {
+      margin-bottom: 0px;
+    }
+
+    .detailsImg-div {
+      margin-left: 5px;
+    }
+
+    .card-title,
+    .card-text {
+      margin-left: 6px;
+    }
+
+    .detailsImg-div {
+      margin-bottom: 20px;
+    }
+
+    .search-bar {
+      height: 30px;
+      width: 100%;
+      /* background-color: white; */
+      margin-bottom: 30px;
+    }
+    .search-bar select{
+      padding: 5px;
+    }
+    
+  </style>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav class="navbar">
+    <div>
+      <h1>
+        <div class="d-flex">
+          <span class="word">Food</span>
+          <span><img src="./logo.png" alt="" width="40px" class="mr-2 logo"></span>
+          <span class="word">Recipe's</span>
+        </div>
+
+      </h1>
+    </div>
+
+    <div style="margin-left: auto;" class="search">
+      <i class="fa fa-search" aria-hidden="true" style="color: black;"></i>
+      <input id="searchInput" type="text" placeholder="search">
+      <div id="searchResults" class="search-results" style="display: none;"></div>
+    </div>
+
+  </nav>
+
+
+  <!-- home -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-8" style="margin-left: 248px;">
+        <div class="search-bar d-flex justify-content-center">
+          <div>
+            <h2 style="margin-right: 25px;">Searching for flavor? Start here</h2>
+          </div>
+          <div class="">
+
+            <select style="margin-top: 5px;" name="food" id="food">
+              <!-- Options will be dynamically added here -->
+            </select>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    <div class="row content">
+
+      <div class="col-4" id="recipeImage">
+        <!-- Images will be displayed here -->
+      </div>
+      <div class="col-8" id="recipeDetails" style="position: relative;">
+
+        <!-- Recipe details will be displayed here -->
+      </div>
+      <div class="instruction" id="instruction"></div>
+    </div>
+  </div>
+  <script src="./app.js"></script>
+</body>
+
+</html>
